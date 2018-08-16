@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 id="ver">V0.1.0 (alpha 1)</h1>
+
+<p id="ban">Money: $0</p>
+
+<script> 
+var x=0, y=1, a=0, cost1=100, cost2=500, sc=3, sc2=3, scc=0, scc2=0, conditie=0, cost3=1000, sc3=5, scc3=0, crit=0, cost4=100000, cond1=0;
+</script>
+
+<button id="make" type="button" onclick="x=x+y; critical()">Make money</button> <br>
+<button id="buton1" type="button" onclick="upgrade1()">Upgrade 1 (money per click) (cost: $100)</button> <br>
+<button id="buton2" type="button" onclick="upgrade2()">Upgrade 2 (money per second) (cost: $500)</button> <br>
+<button id="buton3" type="button" onclick="upgrade3()">Upgrade 3 (critical chance) (cost: $1000)</button> <br><br> 
+<button id="buton4" type="button" onclick="casa1()">Buy house (cost: $100000)</button> <br>
+<img id="casa1" style="width:1px;height:1px;">
+<h1 id="win"></h1>
+
+<p id="multi"></p>
+<p id="multi2"></p>
+<p id="multi3"></p>
+
+<script>
+multi();
+multia();
+multib();
+function upgrade1() {
+	if (x>=cost1) {
+    	x=x-cost1;
+    	cost1=cost1+sc;
+        scc=scc+1;
+        if (scc>=4) {
+        	scc=0;
+       		sc=sc+1;
+        }
+    	y=y+1;
+        critial();
+    }
+	money();
+    multi();
+    document.getElementById('buton1').innerHTML = "Upgrade1 (money per click) (cost: $"+(cost1)+")";
+}
+function upgrade2() {
+	if (x>=cost2) {
+        x=x-cost2;
+        cost2=cost2+sc2;
+        scc2=scc2+1;
+        if (scc2>=4) {
+        	scc2=0;
+            sc2=sc2+1;
+        }
+        document.getElementById('buton2').innerHTML = "Upgrade2 (money per second) (cost: $"+(cost2)+")";
+        a=a+1;
+        if (conditie==0) {
+        conditie=1;
+        loop();
+        }
+    }
+	money();
+    multia();
+}
+function upgrade3() {
+	if (crit<=99) {
+		if (x>=cost3) {
+    		x=x-cost3;
+        	cost3=cost3+sc3;
+        	scc3=scc3+1;
+        	if (scc3>=4) {
+        		scc3=0;
+            	sc3=sc3+1;
+        	}
+        	document.getElementById('buton3').innerHTML = "Upgrade3 (critical chance) (cost: $"+(cost3)+")";
+        	crit=crit+1;
+    	}
+    	money();
+    	multib();
+	}
+}
+function casa1() {
+	if (x>=cost4) {
+    x=x-cost4
+		document.getElementById('ver').style="display: none;";
+    document.getElementById('ban').style="display: none;";
+    document.getElementById('make').style="display: none;";
+    document.getElementById('buton1').style="display: none;";
+    document.getElementById('buton2').style="display: none;";
+    document.getElementById('buton3').style="display: none;";
+    document.getElementById('buton4').style="display: none;";
+    document.getElementById('multi').style="display: none;";
+    document.getElementById('multi2').style="display: none;";
+    document.getElementById('multi3').style="display: none;";
+    document.getElementById('casa1').style="width:150px;height:180px;"
+    document.getElementById('casa1').src="https://cdn.discordapp.com/attachments/458296193219428366/458296219341684756/dm.png";
+    document.getElementById('win').innerHTML="CONGRATULATIONS!"+'<br>'+" YOU WIN!";
+		money();
+    }
+}
+function loop() {
+	x=x+1;
+    money();
+	setTimeout(lop, 500/a);
+}
+function lop() {
+	setTimeout(loop, 500/a);
+}
+function multi() {
+	document.getElementById('multi').innerHTML = "Money per click: $" + (y);
+}
+function multia() {
+	document.getElementById('multi2').innerHTML = "Money per second: $" + (a);
+}
+function multib() {
+	document.getElementById('multi3').innerHTML = "Critical chance: " + (crit) + "%";
+}
+function critical() {
+	var rand=Math.floor(Math.random() * 100) + 1;
+    if (rand<=crit) {
+    	x=x+y*9;
+    }
+    money();
+}
+function money() {
+	document.getElementById('ban').innerHTML = 'Money: $'+(x);
+}
+</script>
+
+</body>
+</html>
